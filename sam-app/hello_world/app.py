@@ -32,11 +32,19 @@ def lambda_handler(event, context):
     #     print(e)
 
     #     raise e
+    try:
+        personid = event['queryStringParameters']['personid']
+    except Exception:
+        personid = -1
+
+    payload = { 
+               "message" : "Hey!",
+               "personid": personid,
+    }
+    print(payload)
 
     return {
         "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
+
+        "body": json.dumps( payload ),
     }
